@@ -1,7 +1,6 @@
 module Main where
 
 import Prelude
-
 import Audio (piece, Events(..))
 import Control.Alt ((<|>))
 import Control.Comonad.Cofree (Cofree, (:<))
@@ -68,7 +67,15 @@ render _ =
             , HH.div_
                 [ HH.h1 [ classes [ "text-center", "text-3xl", "font-bold" ] ]
                     [ HH.text "Example 2" ]
-                , HH.button
+                , HH.h3 [ classes [ "text-center", "text-2xl", "p-5" ] ]
+                    [ HH.text "After pressing start audio, click on the screen repeatedly." ]
+                ]
+            , HH.div [ classes [ "flex-grow" ] ] []
+            ]
+        , HH.div [ classes [ "flex-grow-0", "flex", "flex-row" ] ]
+            [ HH.div [ classes [ "flex-grow" ] ] []
+            , HH.div_
+                [ HH.button
                     [ classes [ "text-2xl", "m-5", "bg-indigo-500", "p-3", "rounded-lg", "text-white", "hover:bg-indigo-400" ], HE.onClick \_ -> StartAudio ]
                     [ HH.text "Start audio" ]
                 , HH.button
