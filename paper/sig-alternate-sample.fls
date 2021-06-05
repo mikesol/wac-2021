@@ -1,12 +1,12 @@
-PWD /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex
+PWD /home/meeshkan-abel/mike/wac-2021
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.tex
-OUTPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.log
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate.cls
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate.cls
+INPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.tex
+OUTPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.log
+INPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate.cls
+INPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/epsfig.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/epsfig.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
@@ -60,8 +60,8 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/base/latexsym.sty
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/url/url.sty
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/waccopyright.sty
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/waccopyright.sty
+INPUT /home/meeshkan-abel/mike/wac-2021/waccopyright.sty
+INPUT /home/meeshkan-abel/mike/wac-2021/waccopyright.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
@@ -225,9 +225,9 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmark
 INPUT /usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.aux
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.aux
-OUTPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.aux
+INPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.aux
+INPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.aux
+OUTPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.aux
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ae/t1aer.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/ae/t1aer.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/ae/aer9.tfm
@@ -263,18 +263,18 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy5.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/cc.png
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/cc.png
-OUTPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.pdf
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/cc.png
+INPUT /home/meeshkan-abel/mike/wac-2021/cc.png
+INPUT /home/meeshkan-abel/mike/wac-2021/cc.png
+OUTPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.pdf
+INPUT /home/meeshkan-abel/mike/wac-2021/cc.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8c.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/ae/aeti9.tfm
 INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
 INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtt9.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/ae/aeti9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/helvetic/phvb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvb8r.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
@@ -299,32 +299,16 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8c.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/ae/aer6.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/ae/aeb10.tfm
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtk10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/ae/aer6.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmu10.tfm
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtti10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/ae/aeb10.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmb10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.bbl
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.bbl
-INPUT /home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.aux
-INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc
+INPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.bbl
+INPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.bbl
+INPUT /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb
+INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb
-INPUT /usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb
-INPUT /usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb

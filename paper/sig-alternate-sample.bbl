@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+
+\bibitem{czaplicki2013asynchronous}
+E.~Czaplicki and S.~Chong.
+\newblock Asynchronous functional reactive programming for guis.
+\newblock {\em ACM SIGPLAN Notices}, 48(6):411--422, 2013.
+
+\bibitem{elliott1997functional}
+C.~Elliott and P.~Hudak.
+\newblock Functional reactive animation.
+\newblock In {\em Proceedings of the second ACM SIGPLAN international
+  conference on Functional programming}, pages 263--273, 1997.
+
+\bibitem{giorgidze2008switched}
+G.~Giorgidze and H.~Nilsson.
+\newblock Switched-on yampa.
+\newblock In {\em International Symposium on Practical Aspects of Declarative
+  Languages}, pages 282--298. Springer, 2008.
+
+\bibitem{maglie2016reactivex}
+A.~Maglie.
+\newblock Reactivex and rxjava.
+\newblock In {\em Reactive Java Programming}, pages 1--9. Springer, 2016.
+
+\end{thebibliography}

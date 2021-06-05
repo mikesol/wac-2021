@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.11.4)  23 DEC 2020 09:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.11.4)  23 APR 2021 07:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.tex"
-(/home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.tex
+**/home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.tex
+(/home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.tex
 LaTeX2e <2020-02-02> patch level 2
-L3 programming layer <2020-02-14> (/home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate.cls (/usr/share/texlive/texmf-dist/tex/latex/graphics/epsfig.sty
+L3 programming layer <2020-02-14> (/home/meeshkan-abel/mike/wac-2021/sig-alternate.cls (/usr/share/texlive/texmf-dist/tex/latex/graphics/epsfig.sty
 Package: epsfig 2017/06/25 v1.7b (e)psfig emulation (SPQR)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
@@ -158,7 +158,7 @@ LaTeX Info: Redefining \cite on input line 1267.
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (/home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/waccopyright.sty
+) (/home/meeshkan-abel/mike/wac-2021/waccopyright.sty
 Package: waccopyright 2014/06/29 v1.2 Copyright statements for ACM classes
  (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
@@ -431,7 +431,7 @@ File: pgflibraryplotmarks.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count294
 \l__pdf_internal_box=\box61
-) (/home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.aux)
+) (/home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.aux)
 \openout1 = `sig-alternate-sample.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
@@ -532,152 +532,79 @@ LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 13
  (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (5.69952pt too wide) in paragraph at lines 203--203
+Overfull \hbox (5.69952pt too wide) in paragraph at lines 205--205
 []  \T1/lmtt/m/n/9 Event ((a -> Effect Unit) -> Effect (Effect Unit))[] 
  []
 
 
-Underfull \hbox (badness 1314) in paragraph at lines 230--231
-[]\T1/aer/m/n/9 For a be-hav-ior to work, it must al-ways con-tain a
+Overfull \hbox (5.69952pt too wide) in paragraph at lines 227--227
+[]\T1/lmtt/m/n/9 --   ((a -> Effect Unit) -> Effect (Effect Unit)) ->[] 
  []
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
- </home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/cc.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 282--282
-[][]$\T1/aer/m/n/9 https : / / klank . dev / ?k & url = https : / / klank-[]share . s3 .
+ </home/meeshkan-abel/mike/wac-2021/cc.png>]
+Underfull \hbox (badness 1067) in paragraph at lines 242--243
+\T1/aer/m/n/9 of type \T1/lmtt/m/n/9 a \T1/aer/m/n/9 that ``un-locks'' the value \T1/lmtt/m/n/9 b\T1/aer/m/n/9 . For ex-am-ple,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 282--282
-\T1/aer/m/n/9 eu-[]west-[]1 . amazonaws . com / K16086575564388849 .
+Overfull \hbox (15.1495pt too wide) in paragraph at lines 310--310
+[]            \T1/lmtt/m/n/9 -- we can work directly on "hello" or 42.0[] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 282--282
-\T1/aer/m/n/9 purs & klank = https : / / klank-[]share . s3 . amazonaws . com /
- []
-
-
-Overfull \hbox (15.1495pt too wide) in paragraph at lines 298--298
-[]           \T1/lmtt/m/n/9 (sinOsc $ 440.0 + 6.0 * (sin (0.1 * rad))))[] 
- []
-
-
-Overfull \hbox (5.69952pt too wide) in paragraph at lines 298--298
-[]         \T1/lmtt/m/n/9 :| (gain' (0.1 + (-0.1) * cos (0.47 * rad))[] 
- []
-
-
-Overfull \hbox (15.1495pt too wide) in paragraph at lines 298--298
-[]           \T1/lmtt/m/n/9 (sinOsc $ 330.0 + 4.0 * (sin (0.2 * rad))))[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 302--302
-[]\T1/aer/b/n/9 Figure 1: Dis-cretized sine wave at the
- []
-
-
-Underfull \hbox (badness 1231) in paragraph at lines 300--327
-\T1/aer/m/n/9 de-pen-dent on time, is chang-ing at a rate of 50 Hz,
+Overfull \hbox (15.1495pt too wide) in paragraph at lines 310--310
+[]            \T1/lmtt/m/n/9 -- via caching it in the returned function[] 
  []
 
 [2]
 Underfull \hbox (badness 10000) in paragraph at lines 332--332
-[][]$\T1/aer/m/n/9 https : / / klank . dev / ?k & url = https : / / klank-[]share . s3 .
+[]\secfnt EXISTENTIALLY-QUANTIFIED
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 332--332
-\T1/aer/m/n/9 eu-[]west-[]1 . amazonaws . com / K16087041970194799 . purs &
+Underfull \hbox (badness 2261) in paragraph at lines 366--367
+\T1/aer/m/n/9 sce-nar-ios, loops usu-ally span mul-ti-ple func-tions with
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 332--332
-\T1/aer/m/n/9 klank = https : / / klank-[]share . s3 . eu-[]west-[]1 . amazonaws . com /
+Underfull \hbox (badness 10000) in paragraph at lines 366--367
+\T1/aer/m/n/9 https : / / github . com / mikesol / purescript-[]wags / blob / main /
  []
 
 
-Overfull \hbox (10.42451pt too wide) in paragraph at lines 374--374
-[]\T1/lmtt/m/n/9 msBetweenSamples = defaultEngineInfo.msBetweenSamples[] 
- []
-
-
-Overfull \hbox (0.97453pt too wide) in paragraph at lines 374--374
-[]\T1/lmtt/m/n/9 kr = (toNumber msBetweenSamples) / 1000.0 :: Number[] 
+Underfull \hbox (badness 10000) in paragraph at lines 366--367
+\T1/aer/m/n/9 examples / kitchen-[]sink / KitchenSink / Piece . purs$, which
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 415--415
-[][]$\T1/aer/m/n/9 https : / / klank . dev / ?k & ec & url = https : / / klank-[]share . s3 .
+Underfull \hbox (badness 4120) in paragraph at lines 388--388
+[]\secfnt TYPE-LEVEL LENSES FOR GRAPH
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 415--415
-\T1/aer/m/n/9 amazonaws . com / K1608660252992183 . purs & klank = https : / /
+Underfull \hbox (badness 10000) in paragraph at lines 418--418
+[]\secfnt ENCODING NON-STRUCTURAL
  []
 
+[4] (/home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.bbl) [5
 
-Underfull \hbox (badness 2932) in paragraph at lines 478--478
-[]\secfnt CHALLENGES AND INI-TIAL SO-LU-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 512--512
-[][]$\T1/aer/m/n/9 https : / / klank . dev / ?k & url = https : / / klank-[]share .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--512
-\T1/aer/m/n/9 s3 . amazonaws . com / K16087046614232954 . purs &
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 512--512
-\T1/aer/m/n/9 klank = https : / / klank-[]share . s3 . amazonaws . com /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 593--593
-[][]\T1/aer/m/n/9 See $https : / / twitter . com / stronglynormal / status /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 593--593
-\T1/aer/m/n/9 1326136187116023812$ and $https : / / twitter . com /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 593--593
-\T1/aer/m/n/9 stronglynormal / status / 1316756584786276352$ for ex-am-
- []
-
-[5]
-Underfull \hbox (badness 1286) in paragraph at lines 611--612
-\T1/aer/m/n/9 Script and \T1/lmtt/m/n/9 purescript-behaviors\T1/aer/m/n/9 , with-out which this
- []
-
-
-Underfull \hbox (badness 1062) in paragraph at lines 611--612
-\T1/aer/m/n/9 thank the Pure-Script com-mu-nity for their help-ful an-
- []
-
-(/home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.bbl) [6] (/home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.aux) ) 
+] (/home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.aux) ) 
 Here is how much of TeX's memory you used:
- 24432 strings out of 481239
- 617138 string characters out of 5920377
- 1083181 words of memory out of 5000000
- 39258 multiletter control sequences out of 15000+600000
- 589394 words of font info for 88 fonts, out of 8000000 for 9000
+ 23695 strings out of 481239
+ 597058 string characters out of 5920377
+ 990919 words of memory out of 5000000
+ 38531 multiletter control sequences out of 15000+600000
+ 583814 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,14n,98p,11928b,1993s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "/home/meeshkan-abel/Downloads/wac-templates-2021/Templates WAC 2021/Latex Template for WAC 2021/Latex/sig-alternate-sample.pdf" (6 pages, 234240 bytes).
+ 68i,14n,98p,1385b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /home/meeshkan-abel/mike/wac-2021/sig-alternate-sample.pdf (5 pages, 156084 bytes).
 PDF statistics:
- 85 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
+ 66 PDF objects out of 1000 (max. 8388607)
+ 47 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

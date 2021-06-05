@@ -1,0 +1,457 @@
+% This is "sig-alternate.tex" V2.1 April 2013
+% This file should be compiled with V2.8 of "sig-alternate.cls" May 2012
+%
+% This example file demonstrates the use of the 'sig-alternate.cls'
+% V2.8 LaTeX2e document class file. It is for those submitting
+% articles to ACM Conference Proceedings WHO DO NOT WISH TO
+% STRICTLY ADHERE TO THE SIGS (PUBS-BOARD-ENDORSED) STYLE.
+% The 'sig-alternate.cls' file will produce a similar-looking,
+% albeit, 'tighter' paper resulting in, invariably, fewer pages.
+%
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V2.8) produces:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) NO page numbers
+%
+% as against the acm_proc_article-sp.cls file which
+% DOES NOT produce 1) thru' 3) above.
+%
+% Using 'sig-alternate.cls' you have control, however, from within
+% the source .tex file, over both the CopyrightYear
+% (defaulted to 200X) and the ACM Copyright Data
+% (defaulted to X-XXXXX-XX-X/XX/XX).
+% e.g.
+% \CopyrightYear{2007} will cause 2007 to appear in the copyright line.
+% \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
+%
+% ---------------------------------------------------------------------------------------------------------------
+% This .tex source is an example which *does* use
+% the .bib file (from which the .bbl file % is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission, you *NEED* to 'insert'
+% your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% ================= IF YOU HAVE QUESTIONS =======================
+% Questions regarding the SIGS styles, SIGS policies and
+% procedures, Conferences etc. should be sent to
+% Adrienne Griscti (griscti@acm.org)
+%
+% Technical questions _only_ to
+% Gerald Murray (murray@hq.acm.org)
+% ===============================================================
+%
+% For tracking purposes - this is V2.0 - May 2012
+
+\documentclass{sig-alternate}
+
+\setlength{\paperheight}{11in}
+\setlength{\paperwidth}{8.5in}
+\usepackage[
+  pass,% keep layout unchanged
+  % showframe,% show the layout
+]{geometry}
+\usepackage{pgfplots}
+
+
+\begin{document}
+
+% Copyright
+\setcopyright{waclicense}
+
+
+%% DOI
+%\doi{10.475/123_4}
+%
+%% ISBN
+%\isbn{123-4567-24-567/08/06}
+%
+%%Conference
+\conferenceinfo{Web Audio Conference WAC-2021,}{July 5--7, 2021, Barcelona, Spain.}
+\CopyrightYear{2021} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
+%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+\title{Functional Reactive Programming and the Web Audio API}
+%\subtitle{[Extended Abstract]
+%\titlenote{A full version of this paper is available as
+%\textit{Author's Guide to Preparing ACM SIG Proceedings Using
+%\LaTeX$2_\epsilon$\ and BibTeX} at
+%\texttt{www.acm.org/eaddress.htm}}}
+%
+% You need the command \numberofauthors to handle the 'placement
+% and alignment' of the authors beneath the title.
+%
+% For aesthetic reasons, we recommend 'three authors at a time'
+% i.e. three 'name/affiliation blocks' be placed beneath the title.
+%
+% NOTE: You are NOT restricted in how many 'rows' of
+% "name/affiliations" may appear. We just ask that you restrict
+% the number of 'columns' to three.
+%
+% Because of the available 'opening page real-estate'
+% we ask you to refrain from putting more than six authors
+% (two rows with three columns) beneath the article title.
+% More than six makes the first-page appear very cluttered indeed.
+%
+% Use the \alignauthor commands to handle the names
+% and affiliations for an 'aesthetic maximum' of six authors.
+% Add names, affiliations, addresses for
+% the seventh etc. author(s) as the argument for the
+% \additionalauthors command.
+% These 'additional authors' will be output/set for you
+% without further effort on your part as the last section in
+% the body of your article BEFORE References or any Appendices.
+
+\numberofauthors{1} %  in this sample file, there are a *total*
+% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+% reasons) and the remaining two appear in the \additionalauthors section.
+%
+\author{
+  % You can go ahead and credit any number of authors here,
+  % e.g. one 'row of three' or two rows (consisting of one row of three
+  % and a second row of one, two or three).
+  %
+  % The command \alignauthor (no curly braces needed) should
+  % precede each author name, affiliation/snail-mail address and
+  % e-mail address. Additionally, tag each line of
+  % affiliation/address with \affaddr, and tag the
+  % e-mail address with \email.
+  %
+  % 1st. author
+  \alignauthor
+  \name{Mike Solomon}
+  \affaddr{Meeshkan}
+  \email{mike@meeshkan.com}
+  \date{22 April 2020}
+}
+% Just remember to make sure that the TOTAL number of authors
+% is the number that will appear on the first page PLUS the
+% number that will appear in the \additionalauthors section.
+
+\maketitle
+\begin{sloppypar}
+  \begin{abstract}
+    Functional Reactive Programming (FRP) is a way to model temporal phenomena using \textit{events}, which carry information corresponding to a precise moment in time, and \textit{behaviors}, which represent time-varying values. This paper shows how FRP can be used to build reactive audio applications that blend the WebAudio API with other browser-based APIs, such as mouse events and MIDI events.  It will start by presenting a brief history of FRP as well as definitions of the \texttt{Event} and \texttt{Behavior} types.  It will then discuss the principal challenges of applying the behavior pattern to WebAudio and how these challenges can be solved by using induction on existentially-quantified and linearly-typed Indexed Cofree Comonads. An implementation of this approach is provided via the library \texttt{purescript-wags}.
+  \end{abstract}
+
+
+  %
+  % The code below should be generated by the tool at
+  % http://dl.acm.org/ccs.cfm
+  % Please copy and paste the code instead of the example below.
+  %
+  %\begin{CCSXML}
+  %<ccs2012>
+  %<concept>
+  %<concept_id>10010520.10010553.10010562</concept_id>
+  %<concept_desc>Computer systems organization~Embedded systems</concept_desc>
+  %<concept_significance>500</concept_significance>
+  %</concept>
+  %<concept>
+  %<concept_id>10010520.10010575.10010755</concept_id>
+  %<concept_desc>Computer systems organization~Redundancy</concept_desc>
+  %<concept_significance>300</concept_significance>
+  %</concept>
+  %<concept>
+  %<concept_id>10010520.10010553.10010554</concept_id>
+  %<concept_desc>Computer systems organization~Robotics</concept_desc>
+  %<concept_significance>100</concept_significance>
+  %</concept>
+  %<concept>
+  %<concept_id>10003033.10003083.10003095</concept_id>
+  %<concept_desc>Networks~Network reliability</concept_desc>
+  %<concept_significance>100</concept_significance>
+  %</concept>
+  %</ccs2012>
+  %\end{CCSXML}
+  %
+  %\ccsdesc[500]{Computer systems organization~Embedded systems}
+  %\ccsdesc[300]{Computer systems organization~Redundancy}
+  %\ccsdesc{Computer systems organization~Robotics}
+  %\ccsdesc[100]{Networks~Network reliability}
+  %
+  %
+  %%
+  %% End generated code
+  %%
+  %
+  %%
+  %%  Use this command to print the description
+  %%
+  %\printccsdesc
+  %
+  %% We no longer use \terms command
+  %%\terms{Theory}
+  %
+  %\keywords{ACM proceedings, \LaTeX, text tagging}
+
+  \section{Introduction}
+  Functional Reactive Programming (FRP) was first introduced as Functional Reactive Animation\cite{elliott1997functional} (Fran) as a way to animate physical phenomena using Hugs, a now-defunct variant of Haskell.  Since then, a number of Haskell libraries, such as \textit{reactive-banana} and \textit{Elerea}, have provided robust implementations of FRP that are used in a number of time-based domains, including animation, user interface implementation, and signal processing.  Newer libraries such as \textit{Yampa} implement a point-free approach using the \textit{arrow} pattern, which provides a group of combinators that ``carry'' time through a computation.  \textit{Yampa} has seen considerable traction in the audio community, serving as the basis for at least one modular synthesizer.\cite{giorgidze2008switched}  As the need emerged to mix more heterogeneous signals and to use programming languages with varying degrees of functional expressivity, Microsoft invested substantial resources in ReactiveX, which uses a pub-sub model based on observables (emitters) and subscribers.\cite{maglie2016reactivex} Some projects, like Elm, made FRP primitives first-class citizens via the \texttt{Signal} type, which functions as an application-wide event bus\cite{czaplicki2013asynchronous}.
+
+
+  This paper will explore how FRP can be used to pilot the WebAudio API. It will use PureScript, a web-friendly dialect of Haskell, and two FRP libraries whose syntaxes are close to the original \textit{Fran} implementation.  It will start by presenting the two basic FRP types --- \texttt{Event} and
+  \texttt{Behavior} --- and will the show how these types can be translated into calls to the WebAudio API.
+
+  \subsection{The Event type}
+
+  The \texttt{Event} type is parameterized over a single type variable \texttt{a} that represents the type of an event, ie \texttt{MouseClick} or \texttt{KeyboardPress}.  The signature for an event is as follows:
+
+  \begin{verbatim}
+newtype Event a =
+  Event ((a -> Effect Unit) -> Effect (Effect Unit))
+       \end{verbatim}
+
+  Here, the \texttt{Event} constructor takes a single argument: a function that accepts a callback and returns an unsubscribe effect. The callback of form \verb=(a -> Effect Unit)= accepts the \textit{event} of type \texttt{a} and performs an arbitrary side effect in the \texttt{Effect} monad.  This callback is called with the event payload, such as a key value or mouse coordinates.  The return value of \texttt{Effect (Effect Unit)} is an unsubscribe effect.  The double-effect acts as a closure so that the unsubscribe operation is not performed immediately but rather is passed to the consumer to be called at a later time, ie in the following manner:
+
+  \begin{verbatim}
+-- subscribe ::
+--   forall a r.
+--   Event a ->
+--   (a -> Effect r) ->
+--   Effect (Effect Unit)
+--
+-- makeEvent ::
+--   forall a.
+--   ((a -> Effect Unit) -> Effect (Effect Unit)) ->
+--   Event a
+
+main :: Effect Unit
+main = do
+  unsubscribe <- subscribe (makeEvent \k -> do
+    k "hello"
+    pure $ pure unit) log
+  unsubscribe
+\end{verbatim}
+
+  When the unsubscribe effect is invoked, the callback no longer receives events emitted by a source.
+
+  \subsection{The Behavior type}
+
+  A \texttt{Behavior} is a continuous function of time that is \textit{sampled} by an event.
+
+  \begin{verbatim}
+newtype ABehavior event a =
+  ABehavior (forall b. event (a -> b) -> event b)
+
+type Behavior a = ABehavior Event a
+       \end{verbatim}
+
+  A \texttt{Behavior} must always be able to produce a value of type \texttt{a} that ``unlocks'' the value \texttt{b}. For example, one common behavior is \verb=currentTime=, with a signature \verb=currentTime :: Behavior Instant=. In the example below, the current time is sampled by an event that curries a mouse click and produces \texttt{Tuple Point Instant}.
+
+  \begin{verbatim}
+timeAndClick :: Event (Tuple Point Instant)
+timeAndClick =
+  sample currentTime (Tuple <$> mouseClick)
+       \end{verbatim}
+
+  \section{Audio graphs as behaviors}
+
+  An audio graph in the Web Audio API can be thought of as a continuous function of time. This means that, in Functional Reactive Programming, a good candidate for its type would be \texttt{Behavior Graph}. At a high-level, the set-up would be:
+  
+  \begin{enumerate}
+    \item A behavior describing the current web audio graph (ie an OscillatorNode going to a GainNode going to a Context) is sampled by some event, ie a mouse click or the passage of time in a polling loop.
+    \item A subscriber listens to changes in the graph, rendering them to the imperative web-audio API.
+    \item Unsubscribing from the event cleans up resources like the context and any active \texttt{MediaRecorder} or \texttt{BrowserMediaStream} objects.
+  \end{enumerate}
+
+  \section{Audio graphs as streams}
+
+  If the \texttt{Behavior} type provides a way to represent Web Audio graphs that are sampled over time, there is still the practical question of how to produce these graphs.
+
+  One approach would be to have a function \texttt{Environment -> Graph} that, for any given environment (ie the current time, if a mouse is clicked, etc), emits a graph. The issue with this approach is that it is stateless: there is no way to know what the graph was at time $n-1$, which makes working with named resources (ie starting and stopping precise oscillators) impossible.  Another issue is that it requires the rebuilding of a graph every time the function is called, which is computationally expensive.
+
+  A second approach would be to pass an accumulator to the function, ie \texttt{Accumulator -> Environment -> Graph}. This allows the function to have access to the past, but it still requires rebuilding an entire graph. It is also inefficient in that it requires traversing an accumulator twice - once to build it and once to read it at the next timestamp.
+  
+  A \textit{cofree comonad}, or \textit{stream}, is one way to construct a \texttt{Behavior} that solves these two issues. The signature for cofree comonad is \verb=Cofree f a=, where \texttt{f} is an arbitrary \texttt{Functor} and \texttt{a} is a type annotating the functor as it branches. This allows one to retrieve the annotation (current value, or head) of the stream as well as the functor (tail) of the stream \textit{ad infinitum}, which is the classic comonadic \texttt{extract}/\texttt{extend} pattern.
+
+  As an example, consider the following cofree comonad that acts as an easing algoritm that increases if \verb=adj= is negative and decreases to 20 if \verb=adj= is positive:
+
+  \begin{verbatim}
+easingAlgorithm :: Cofree ((->) Int) Int
+easingAlgorithm =
+  let
+    fOf initialTime =
+      mkCofree
+        initialTime
+        \adj -> fOf $ max 20 (initialTime - adj)
+  in
+    fOf 20
+  \end{verbatim}
+
+  The previous \texttt{initialTime} is passed to the future \texttt{(->) Int}, allowing the function to know if an adjustment should be made (\texttt{max 20 (initialTime - adj)}) without any need for an accumulator that passes along \texttt{initialTime}.
+  
+  This construction is representative of a general pattern that applies to all cofree comonads - to produce an infinite stream of values, any constructor of a cofree comonad must make a recursive call to itself at some point. Otherwise, the program would be infinitely long. In calling itself, it can transmit information from a current state to a future state. This solves the problem of retaining state: the state is retained in the construction of the cofree comonad itself. 
+  
+  Furthermore, the state does not need to be packaged and ``passed'' to the future - it can be cached directly in the future, allowing small parts of a state to be split off and passed into alternate versions of the future.  For example, if \verb=Cofree f a= needs a \verb=String= \textit{or} a \verb=Number= at time $t+1$, there's no need to create an \verb=Either String Number= --- you can return a different \texttt{mkCofree} based on a branching condition that uses either the \verb=String= or the \verb=Number=, obviating the need to create an \verb=Either String Number=.
+
+\begin{verbatim}
+  easingAlgorithm :: Cofree ((->) Int) Int
+  easingAlgorithm =
+    let
+      hello s = 21
+      world q = 22
+      fOf initialTime =
+        mkCofree
+          initialTime
+          \adj -> fOf $ max
+            -- we can work directly on "hello" or 42.0
+            -- via caching it in the returned function
+            -- so we don't need to send an
+            -- Either String Number
+            -- to (->) Int
+            (if initialTime > 20
+              then hello "hello" else world 42.0)
+            (initialTime - adj)
+    in
+      fOf 20
+\end{verbatim}
+  Modeling Web-Audio graphs this way helps reduce needless memory operations by transmitting graph information directly to the point of construction of the graph at a future timestamp.
+
+  Returning to behaviors, a cofree comonad can be converted to a behavior by providing a function to `'`explore'', or actualize, the underlying functor.
+
+  \begin{verbatim}
+streamToBehavior ::
+  forall f.
+  (f ~> Identity) ->
+  Cofree f ~>
+  Behavior
+streamToBehavior explore cf = behavior \aToB ->
+  makeEvent \k -> do
+    r <- Ref.new cf
+    subscribe aToB \e -> do
+      i <- Ref.read r
+      k (e $ head i)
+      Ref.write (unwrap <<< explore $ tail i) r
+  \end{verbatim}
+
+  In this way, streams of web audio graphs can act as behaviors that are sampled by arbitrary events, streaming graphs frame-by-frame in the same manner as audio itself is streamed.
+
+  \section{Existentially-quantified streams}
+
+  For frequently-changing audio graphs, it is inefficient to have a single \texttt{Graph} type because it is needlessly broad. For example, if at a given moment in time a single sine-wave oscillator is playing but the full audio graph could be one of thousands of outcomes, some form of pattern-matching will be needed to ``rule out'' the other outcomes and work with the single oscillator. Obtaining the current audio graph by many calls to \texttt{if/then} statements slows down computations and causes missed rendering deadlines.
+
+  One way to solve this is for information to be encoded with a precise type that is erased when the stream is consumed. In functional programming, this pattern is called \textit{existential types}, or \textit{rank-n types}. It tells the compiler ``on the inside of this computation, a type will exist that is not available to the outside scope.''
+
+  When using this pattern, cofree comands no longer suffice because they do not contain an existential type. Instead, a tweaked version is needed:
+
+  \begin{verbatim}
+makeStream ::
+  forall a b.
+  Frame a b ->
+  (Frame a b -> Stream a) ->
+  Stream a
+  \end{verbatim}
+
+  Here, the type \texttt{b} is the existentially-quantified type that is erased in \texttt{Stream a}. That means that it can change on every invocation of \texttt{makeStream}.  For example, imagine that we have \texttt{Frame String b} as our \texttt{Frame a b} and \texttt{Stream String} as our \texttt{Stream a}.  We can write:
+
+  \begin{verbatim}
+freeze :: forall a b. Frame a b -> String a
+freeze s = makeStream s freeze
+
+myStream :: Stream String
+myStream =
+  makeStream
+    (Frame "hello" 1)
+    \(Frame s i) ->
+      makeStream (Frame s (toNumber i)) freeze
+  \end{verbatim}
+  
+  Here, the \texttt{b} in \texttt{Frame String b} is initially occupied by an \texttt{Int} (1) and is then occupied by a \texttt{Number} (1.0). However, the output stream of type \texttt{Stream String} knows nothing about the precise type of \texttt{b} - all it knows is that it exists.
+  
+  In web-audio speak, this can be translated roughly as \texttt{Frame Sound Graph} and \texttt{Stream Sound}. The ear does not care about the intermediary graphs that are produced. They are erased over the course of the computation, leaving only the sound. Using this strategy, a computation can work off a precise graph type (ie a type representing one oscillator and one gain node) and then change the type downstream instead of pattern-matching against a mega-type, saving precious computation time.
+
+  Like cofree comands, at some point this strategy will need a recursive call to sustain itself into the future. \texttt{freeze} is a particularly brutal choice because it closes off the possibility for the graph to update. In real-world scenarios, loops usually span multiple functions with multiple branching-conditions, allowing for complex state machines. An example of a recursive stream can be found at \url{https://github.com/mikesol/purescript-wags/blob/main/examples/kitchen-sink/KitchenSink/Piece.purs}, which loops over time by feeding its own signature \texttt{LoopSig} to itself.
+
+  \section{Linear types for graph operations}
+
+  Using the strategy above, we can achieve substantial gains in speed by working off of a specific type that does not need heavy pattern-matching.  Another way to think of this is that the pattern-matching happens at compile time, plugging in the correct function as the compiler traverses the tree, instead of at runtime.
+
+  While this works on a conceptual level, it runs into challenges when making it work on top of an imperative API like Web Audio. This is because Web Audio itself is stateful, which means that a \texttt{Frame} at time $t$ may have the same type as a frame at time $t + 1000$, but the web audio graph itself may be different because the actual nodes have changed and occupy different locations in memory.
+
+  One way to solve this problem is through the use of \textit{linear types}. If a resource has a linear type, it must be consumed exactly once.  Thinking in terms of frames and streams, we want each frame in \texttt{makeStream} to be consumed only once --- namely, in the continuation function that produces the new head of the stream. We \textit{don't} want this frame to be consumed again in 10 minutes, even if the type would otherwise allow for it. To fix this, we can tweak our function to accept a proof term:
+
+  \begin{verbatim}
+    makeStream ::
+      forall p0 a b.
+      Frame p0 a b ->
+      (forall p1. Frame p1 a b -> Stream a) ->
+      Stream a
+      \end{verbatim}
+  
+  Now, there is no way the continuation function can be invoked with the prior frame because the types do not align: \texttt{p0} is a different type than \texttt{p1} and can \textit{never} be the same because we can never know anything about \texttt{p1} other than the fact that it exists (we have another existential type).
+
+  Working with linear types means that one of the bread-and-butter functional classes --- \texttt{Applicative} --- is no longer possible. Applicative allows you to pull a frame ``out of thin air'' using a function called \texttt{pure}.  However, and unlike many judicial systems in the world, we do not want to fabricate proof out of thin air. Rather, proof is encoded in the type itself, and while it can be passed onwards via a \texttt{map} or \texttt{apply} or \texttt{bind} operation, it cannot be fabricated via \texttt{pure}. This leads to the rare but interesting outcome where \texttt{Frame} can implement \verb=Functor=, \verb=Apply= and \verb=Bind= but cannot implement \verb=Applicative=. In other words, it cannot be a \verb=Monad= even though it is a can use \texttt{do} notation via the implementation of \verb=Bind=. The extrication of \texttt{Bind} from \texttt{Monad} is a fairly recent development in functional programming and has led to a plethora of monad-like constructs that omit some monadic laws. Bringing it back to audio, we delegate the creation of proof-of-time (Applicative) exclusively to the engine, but we leave it to artists to map, apply and bind temporal objects in order to create audio graphs.
+
+  \section{Type-level lenses for graph access}
+
+  Now that we have a stream comprised of type-safe graphs, we need a way to focus on part of those graphs to do operations, like changing a frequency or turning off buffered playback.  In functional programming, the conventional way to zoom into a graph is using a Lens. Here, however, lenses are onerous for two reasons:
+
+  \begin{enumerate}
+    \item Because the type of the audio graph changes, the type of the lens must change as well.
+    \item ADTs can't have feedback loops and lenses can't have feedback loops, whereas audio graphs can.
+  \end{enumerate}
+
+  To get around this problem, we can use type-classes to extract information from a type that acts as a lens and then use a different mechanism, ie an adjacency matrix, to effectuate graph operations that may be recursive. Adjacency matrices also have the advantage of \textit{O(log(n))} lookup-time, which is significantly faster than traversing a deeply-nested graph.
+
+  For example, consider the type:
+
+  \begin{verbatim}
+  Gain
+    (Function 
+      (Proxy MyGain) 
+      (PlayBuf
+        /\ Delay (Gain (Proxy MyGain))
+        /\ Unit))
+  \end{verbatim}
+
+  A type-class can pick apart this type at compile-time to find that the top-level \verb=Gain= feeds back onto itself lower in the graph. It can then use this information to determine the correct pointer in an adjacency matrix when it has to look up \verb=MyGain=. Note that this type-traversal happens at compile-time, which means that at runtime, it has already produced a pointer that can be fed directly to an adjacency matrix. This means that, in a complex polyphonic structure, we can operate on a single audio unit without a runtime graph traversal, allowing for very fast responses to events like MIDI onsets.
+
+  \section{Indexed binds}
+
+  In the previous examples, we were working off of a type \texttt{Frame proof Sound Graph} where the graph type was an existential type. By doing this, we've lost one of the core advantages of functors: the ability to hold onto \textit{any} type. This means that all of our computations need to be encoded in the graph. Let's say, for example, we want to hold onto an arbitrary floating-point value. We'd have to stash it somewhere in an audio graph and then ignore it at rendering time.
+
+  A better solution is to move the graph itself to the type-level and allow the functor to carry an arbitrary type. This can be achieved through an \textit{indexed} signature, ie \verb=Frame proof Sound InGraph OutGraph a=. In this setup, the graph is moved to the type-level and its representation is cached within the frame type. Managing the graph manipulations as a monadic side effect checked by indexed binds has the added advantage of allowing for validation at every \verb=bind= to disallow illegal operations on the graph, like disconnecting audio that was never connected in the first place.
+
+  \section{Encoding non-structural graph changes using inductive types}
+
+  While indexed binds can enforce graph correctness for changes like connecting and disconnecting audio units, we still haven't found a way to account for non-structural graph changes. For example, when we set the frequency of an oscillator, the graph's structure stays the same even though the sound changes. In these cases, we may have many changes within a single timestep, and we need a way to indicate these changes in the type system so that the same change is not accidentally applied multiple times. Simply marking the graph as ``changed'' does not suffice, as we may change it multiple times.  One solution is to encode this inductively using a change-bit.
+
+  Inductive types are types that are incremented by a successor type. The classic example is the Peano representation of integers:
+
+  \begin{verbatim}
+foreign import data Z :: Type
+foreign import data Succ :: Type -> Type
+
+type Zero = Z
+type One = Succ Zero
+type Two = Succ One
+type Three = Succ Two
+-- etc
+  \end{verbatim}
+
+  Including an inductive type in an indexed bind disallows map and apply operations on types at different stages of induction. This is a compile-time check, so there is no runtime penalty.
+
+  \section{purescript-wags}
+  
+  We've now shown how to build FRP-compliant behaviors out of type-safe audio streams with type-level lenses for efficient lookup operations and indexed binds that enforce graph correctness, allow individual frames of a stream to be a functor, and encode the correct order of non-structural graph changes.
+
+  \texttt{purescript-wags} is a PureScript library that implements this strategy. It is available at \url{https://github.com/mikesol/purescript-wags}, and has links to several code and audio examples.
+
+  %\end{document}  % This is where a 'short' article might terminate
+
+  %ACKNOWLEDGMENTS are optional
+  \section{Acknowledgments}
+  I'd like to thank Phil Freeman for creating both PureScript and \texttt{purescript-behaviors}, without which this paper would not have been possible.  I'd also like to thank the PureScript community for their helpful answers to my questions as I learned the language and built \texttt{purescript-wags}.
+
+  %
+  % The following two commands are all you need in the
+  % initial runs of your .tex file to
+  % produce the bibliography for the citations in your paper.
+  \bibliographystyle{abbrv}
+  \bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+
+\end{sloppypar}
+\end{document}
