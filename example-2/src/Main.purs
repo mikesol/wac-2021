@@ -1,7 +1,9 @@
 module Main where
 
 import Prelude
-import Audio (piece)
+
+import Audio (piece, Events(..))
+import Control.Alt ((<|>))
 import Control.Comonad.Cofree (Cofree, (:<))
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
@@ -13,6 +15,7 @@ import Effect (Effect)
 import Effect.Aff.Class (class MonadAff)
 import Effect.Class (class MonadEffect)
 import FRP.Event (subscribe)
+import FRP.Event.Mouse (down)
 import Halogen (ClassName(..))
 import Halogen as H
 import Halogen.Aff (awaitBody, runHalogenAff)
@@ -64,7 +67,7 @@ render _ =
             [ HH.div [ classes [ "flex-grow" ] ] []
             , HH.div_
                 [ HH.h1 [ classes [ "text-center", "text-3xl", "font-bold" ] ]
-                    [ HH.text "Example 1" ]
+                    [ HH.text "Example 2" ]
                 , HH.button
                     [ classes [ "text-2xl", "m-5", "bg-indigo-500", "p-3", "rounded-lg", "text-white", "hover:bg-indigo-400" ], HE.onClick \_ -> StartAudio ]
                     [ HH.text "Start audio" ]
@@ -106,7 +109,7 @@ handleAction = case _ of
     unsubscribe <-
       H.liftEffect
         $ subscribe
-            (run (pure unit) (pure unit) { easingAlgorithm } (FFIAudio ffiAudio) piece)
+            (run (pure StartExample <|> (down $> MouseDown)) (pure unit) { easingAlgorithm } (FFIAudio ffiAudio) piece)
             (const $ pure unit)
     H.modify_ _ { unsubscribe = unsubscribe, audioCtx = Just ctx }
   StopAudio -> do
