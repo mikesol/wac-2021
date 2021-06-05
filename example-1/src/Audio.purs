@@ -1,7 +1,6 @@
 module Audio where
 
 import Prelude
-
 import Control.Apply.Indexed ((:*>))
 import Control.Comonad.Cofree (head, tail)
 import Data.Int (toNumber)
@@ -92,14 +91,13 @@ piece =
           fade
             | time < 1.0 = g' $> calcSlope 0.0 0.0 1.0 1.0 time
             | otherwise = g' $> 1.0
-          
+
           g = g' * fade
 
           ramp = g $> calcSlopeExp 0.0 1.0 10.0 0.0 4.0 time
-
         in
           ichange
-            { unit0: gain_ (g * ramp )
+            { unit0: gain_ (g * ramp)
             , unit1: gain_ g
             , unit2: gain_ (g * (sub 1.0 <$> ramp))
             }
