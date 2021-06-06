@@ -24,14 +24,13 @@ import WAGS.Change (ichange)
 import WAGS.Control.Functions.Validated (iloop, (@!>))
 import WAGS.Control.Indexed (IxWAG)
 import WAGS.Control.Types (Frame0, Scene)
-import WAGS.Graph.AudioUnit (TGain, TPeriodicOsc, TSpeaker)
-import WAGS.Graph.Optionals (gain_, periodicOsc_)
+import WAGS.Graph.AudioUnit (OnOff(..), TGain, TPeriodicOsc, TSpeaker)
 import WAGS.Graph.Parameter (ff)
 import WAGS.Interpret (FFIAudio)
 import WAGS.Math (calcSlope, calcSlopeExp)
 import WAGS.NE2CF (ASDR, makePiecewise)
 import WAGS.Patch (ipatch)
-import WAGS.Run (SceneI)
+import WAGS.Run (RunAudio, SceneI, RunEngine)
 
 type POsc (a :: Type)
   = V.Vec a Number /\ V.Vec a Number
@@ -57,18 +56,17 @@ type SceneType
     }
 
 type FrameTp p i o a
-  = IxWAG FFIAudio (Effect Unit) p Unit i o a
+  = IxWAG RunAudio RunEngine p Unit i o a
 
-jnel :: forall a. NonEmpty List (NonEmpty List a) -> NonEmpty List a
-jnel (a :| Nil) = a
+envE = 0.11 :: Number
 
-jnel ((a :| b) :| ((c :| d) : e)) = jnel ((a :| (b <> pure c <> d)) :| e)
-
-pwf' :: NonEmpty List (Number /\ Number)
-pwf' = (0.0 /\ 0.0) :| (0.03 /\ 1.0) : (0.07 /\ 0.1) : (0.09 /\ 0.0) : Nil
+pwf' :: List (Number /\ Number)
+pwf' = (0.03 /\ 1.0) : (0.07 /\ 0.1) : (0.09 /\ 0.0) : (envE /\ 0.0) : Nil
 
 pwf :: NonEmpty List (Number /\ Number)
-pwf = jnel $ map (\i -> over (traversed <<< _1) (add (0.11 * toNumber i)) pwf') (0 :| (1 .. 200))
+pwf =
+  (0.00 /\ 0.0)
+    :| (join $ map (\i -> over (traversed <<< _1) (add (envE * toNumber i)) pwf') (0 .. 100))
 
 endT :: Number
 endT = fst $ NEL.last $ NonEmptyList pwf
@@ -91,16 +89,16 @@ createFrame :: FrameTp Frame0 {} SceneType Control
 createFrame =
   ipatch
     :*> ( ichange
-          { mix: gain_ 1.0
-          , unit0: gain_ 0.0
-          , unit1: gain_ 0.0
-          , unit2: gain_ 0.0
-          , osc0: periodicOsc_ osc0 $ midi2cps 51.0
-          , osc1: periodicOsc_ osc1 $ midi2cps 57.0
-          , osc2: periodicOsc_ osc2 $ midi2cps 60.0
+          { mix: 1.0
+          , unit0: 0.0
+          , unit1: 0.0
+          , unit2: 0.0
+          , osc0: { waveform: osc0, onOff: On, freq: midi2cps 51.0 }
+          , osc1: { waveform: osc1, onOff: On, freq: midi2cps 57.0 }
+          , osc2: { waveform: osc2, onOff: On, freq: midi2cps 60.0 }
           }
           $> { asdr: makePiecewise pwf
-            , osc0: ne2cf (50.0 :| 52.0 : 54.0 :56.0 : Nil)
+            , osc0: ne2cf (50.0 :| 52.0 : 54.0 : 56.0 : Nil)
             , osc1: ne2cf (55.0 :| 57.0 : 60.0 : 61.0 : 63.0 : 67.0 : Nil)
             , osc2: ne2cf (62.0 :| 65.0 : 66.0 : 69.0 : 71.0 : Nil)
             }
@@ -115,7 +113,7 @@ derive instance eqEvents :: Eq Events
 midi2cps :: Number -> Number
 midi2cps i = 440.0 * (2.0 `pow` ((i - 69.0) / 12.0))
 
-piece :: Scene (SceneI Events Unit) FFIAudio (Effect Unit) Frame0 Unit
+piece :: Scene (SceneI Events Unit) RunAudio RunEngine Frame0 Unit
 piece =
   (const createFrame)
     @!> iloop \e ctrl ->
@@ -135,17 +133,17 @@ piece =
           ramp = g $> calcSlopeExp 0.0 1.0 endT 0.0 4.0 time
 
           ch =
-            { unit0: gain_ (g * ramp)
-            , unit1: gain_ g
-            , unit2: gain_ (g * (sub 1.0 <$> ramp))
+            { unit0: g * ramp
+            , unit1:  g
+            , unit2: g * (sub 1.0 <$> ramp)
             }
         in
           if active && trigger == MouseDown then
             ichange
               ( R.union
-                  { osc0: periodicOsc_ osc0 (midi2cps $ head ctrl.osc0)
-                  , osc1: periodicOsc_ osc1 (midi2cps $ head ctrl.osc1)
-                  , osc2: periodicOsc_ osc2 (midi2cps $ head ctrl.osc2)
+                  { osc0: midi2cps $ head ctrl.osc0
+                  , osc1: midi2cps $ head ctrl.osc1
+                  , osc2: midi2cps $ head ctrl.osc2
                   }
                   ch
               )
