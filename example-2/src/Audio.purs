@@ -1,7 +1,6 @@
 module Audio where
 
 import Prelude
-
 import Control.Apply.Indexed ((:*>))
 import Control.Comonad.Cofree (Cofree, deferCofree, head, tail)
 import Data.Identity (Identity(..))
@@ -17,7 +16,6 @@ import Data.Tuple.Nested (type (/\), (/\))
 import Data.Typelevel.Num (D4, D5)
 import Data.Vec ((+>))
 import Data.Vec as V
-import Effect (Effect)
 import Math (pow)
 import Record as R
 import WAGS.Change (ichange)
@@ -26,7 +24,6 @@ import WAGS.Control.Indexed (IxWAG)
 import WAGS.Control.Types (Frame0, Scene)
 import WAGS.Graph.AudioUnit (OnOff(..), TGain, TPeriodicOsc, TSpeaker)
 import WAGS.Graph.Parameter (ff)
-import WAGS.Interpret (FFIAudio)
 import WAGS.Math (calcSlope, calcSlopeExp)
 import WAGS.NE2CF (ASDR, makePiecewise)
 import WAGS.Patch (ipatch)
@@ -134,7 +131,7 @@ piece =
 
           ch =
             { unit0: g * ramp
-            , unit1:  g
+            , unit1: g
             , unit2: g * (sub 1.0 <$> ramp)
             }
         in
