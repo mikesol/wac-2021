@@ -1,8 +1,10 @@
 module Main where
 
 import Prelude
+
 import Audio (piece)
 import Control.Comonad.Cofree (Cofree, (:<))
+import Control.Promise (toAffE)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (fst, snd)
@@ -13,6 +15,7 @@ import Effect (Effect)
 import Effect.Aff.Class (class MonadAff)
 import Effect.Class (class MonadEffect)
 import FRP.Event (subscribe)
+import Foreign.Object as O
 import Halogen (ClassName(..))
 import Halogen as H
 import Halogen.Aff (awaitBody, runHalogenAff)
@@ -20,7 +23,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.VDom.Driver (runUI)
-import WAGS.Interpret (AudioContext, BrowserPeriodicWave, FFIAudio(..), close, context, defaultFFIAudio, makePeriodicWave, makeUnitCache)
+import WAGS.Interpret (AudioContext, BrowserPeriodicWave, FFIAudio(..), close, context, decodeAudioDataFromUri, defaultFFIAudio, makePeriodicWave, makeUnitCache)
 import WAGS.Run (run)
 
 main :: Effect Unit
@@ -65,8 +68,6 @@ render _ =
             , HH.div_
                 [ HH.h1 [ classes [ "text-center", "text-3xl", "font-bold" ] ]
                     [ HH.text "Example 3" ]
-                , HH.h3 [ classes [ "text-center", "text-2xl", "p-5" ] ]
-                    [ HH.text "After pressing start audio, click on the screen repeatedly." ]
                 ]
             , HH.div [ classes [ "flex-grow" ] ] []
             ]
@@ -109,9 +110,14 @@ handleAction = case _ of
   StartAudio -> do
     handleAction StopAudio
     ctx <- H.liftEffect context
+    chaos <-
+      H.liftAff $ toAffE
+        $ decodeAudioDataFromUri
+            ctx
+            "https://freesound.org/data/previews/100/100981_1234256-lq.mp3"
     unitCache <- H.liftEffect makeUnitCache
     let
-      ffiAudio = defaultFFIAudio ctx unitCache
+      ffiAudio = (defaultFFIAudio ctx unitCache) { buffers = O.singleton "chaos" chaos }
     unsubscribe <-
       H.liftEffect
         $ subscribe
