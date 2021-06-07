@@ -1,6 +1,7 @@
 module Audio where
 
 import Prelude
+
 import Control.Applicative.Indexed ((:*>))
 import Control.Comonad.Cofree (Cofree, head, tail)
 import Data.Either (Either(..))
@@ -24,7 +25,7 @@ import WAGS.Control.Functions.Validated (ibranch, (@!>))
 import WAGS.Control.Indexed (IxWAG)
 import WAGS.Control.Types (Frame0, Scene, WAG)
 import WAGS.Graph.AudioUnit (OnOff(..), TBandpass, TGain, TLoopBuf, TSawtoothOsc, TSpeaker)
-import WAGS.NE2CF (nonEmptyToCofree')
+import WAGS.NE2CF (NonEmptyToCofree', nonEmptyToCofree')
 import WAGS.Patch (ipatch)
 import WAGS.Run (RunAudio, SceneI, RunEngine)
 
@@ -43,9 +44,6 @@ type BaseScene toMix rest
     , osc :: TSawtoothOsc /\ {}
     | rest
     }
-
-type NonEmptyToCofree' a
-  = Number -> Cofree ((->) Number) a
 
 shift :: Maybe Int -> Int
 shift Nothing = 0
