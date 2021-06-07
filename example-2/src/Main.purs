@@ -109,6 +109,7 @@ easingAlgorithm =
 handleAction :: forall output m. MonadEffect m => MonadAff m => Action -> H.HalogenM State Action () output m Unit
 handleAction = case _ of
   StartAudio -> do
+    handleAction StopAudio
     ctx <- H.liftEffect context
     unitCache <- H.liftEffect makeUnitCache
     let
