@@ -60,7 +60,7 @@ spacedNE2CF space l =
 
               sp = toNumber i * space
 
-              spNext = toNumber i * space
+              spNext = toNumber (i + 1) * space
 
               terminus = space * (toNumber $ NEL.length (NonEmptyList l))
             in
@@ -121,7 +121,7 @@ createFrame :: FrameTp Frame0 {} BaseSceneClosed Step1Acc
 createFrame =
   ipatch
     :*> ichange
-        { mix: 0.1
+        { mix: 0.6
         , osc: { freq: fund, onOff: On }
         , bpf0: { q: 40.0 }
         , bpf1: { q: 40.0 }
