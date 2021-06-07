@@ -114,7 +114,7 @@ handleAction = case _ of
       H.liftAff $ toAffE
         $ decodeAudioDataFromUri
             ctx
-            "https://freesound.org/data/previews/100/100981_1234256-lq.mp3"
+            "https://freesound.org/data/previews/128/128649_689000-hq.mp3"
     unitCache <- H.liftEffect makeUnitCache
     let
       ffiAudio = (defaultFFIAudio ctx unitCache) { buffers = O.singleton "chaos" chaos }

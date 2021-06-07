@@ -99,7 +99,7 @@ type Step2Acc
   = Step2Acc' (NonEmptyToCofree' Number)
 
 initialStep2Acc :: Step2Acc
-initialStep2Acc = { osc: spacedNE2CF 0.2 (30.0 :| 35.0 : 31.0 : 34.0 : 39.0 : 37.0 : 32.0 : 33.0 : Nil) }
+initialStep2Acc = { osc: spacedNE2CF 0.2 (42.0 :| 47.0 : 43.0 : 46.0 : 51.0 : 49.0 : 44.0 : 45.0 : Nil) }
 
 type BaseSceneClosed
   = BaseScene () ()
@@ -110,7 +110,7 @@ type BaseSceneOpen
 type FrameTp p i o a
   = IxWAG RunAudio RunEngine p Unit i o a
 
--- type SceneTp :: forall k. k -> Type
+type SceneTp :: forall k. k -> Type
 type SceneTp p
   = Scene (SceneI Unit Unit) RunAudio RunEngine p Unit
 
@@ -121,7 +121,8 @@ createFrame :: FrameTp Frame0 {} BaseSceneClosed Step1Acc
 createFrame =
   ipatch
     :*> ichange
-        { mix: 0.6
+        { mix: 0.1
+        , pad: 1.0
         , osc: { freq: fund, onOff: On }
         , bpf0: { q: 40.0 }
         , bpf1: { q: 40.0 }
@@ -147,7 +148,7 @@ step2 :: forall proof. ContTp proof BaseSceneOpen Step2Acc
 step2 =
   ibranch \e a ->
     let
-      loopStart = 4.0 + 2.0 * sin (3.0 * e.time * pi)
+      loopStart = 1.0 + 1.0 * sin (3.0 * e.time * pi)
 
       actualized = hmap (((#) e.time) :: CFAp) a
 
@@ -191,7 +192,7 @@ step1 =
                       , bpf2: 2000.0
                       , bpf3: 2400.0
                       , bpf4: 3000.0
-                      , buf: { buffer: "chaos", loopStart: 2.0, loopEnd: 2.2 }
+                      , buf: { buffer: "chaos", loopStart: 2.0, loopEnd: 2.2, onOff: On }
                       }
                   $> initialStep2Acc
               )
