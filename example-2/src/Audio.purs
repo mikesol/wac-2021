@@ -24,7 +24,7 @@ import WAGS.Control.Indexed (IxWAG)
 import WAGS.Control.Types (Frame0, Scene)
 import WAGS.Graph.AudioUnit (OnOff(..), TGain, TPeriodicOsc, TSpeaker)
 import WAGS.Graph.Parameter (ff)
-import WAGS.Math (calcSlope, calcSlopeExp)
+import WAGS.Math (calcSlope)
 import WAGS.NE2CF (ASDR, makePiecewise)
 import WAGS.Patch (ipatch)
 import WAGS.Run (RunAudio, SceneI, RunEngine)
@@ -147,11 +147,11 @@ piece =
 
           g = g' * fade
 
-          ramp = g $> calcSlopeExp 0.0 1.0 endT 0.0 4.0 time
+          ramp = g $> calcSlope 0.0 1.0 endT 0.0 time
 
           ch =
-            { unit0: g * ramp
-            , unit1: g
+            { unit0: g
+            , unit1: g * ramp
             , unit2: g * (sub 1.0 <$> ramp)
             , unit3: g
             }
