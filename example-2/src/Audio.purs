@@ -13,7 +13,7 @@ import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty, (:|))
 import Data.Tuple (fst)
 import Data.Tuple.Nested (type (/\), (/\))
-import Data.Typelevel.Num (D4, D5)
+import Data.Typelevel.Num (D3, D4, D5)
 import Data.Vec ((+>))
 import Data.Vec as V
 import Math (pow)
@@ -41,15 +41,20 @@ osc1 = (0.0 +> 0.03 +> 0.05 +> 0.1 +> V.empty) /\ (0.0 +> 0.1 +> -0.2 +> 0.03 +>
 osc2 :: POsc D5
 osc2 = (0.0 +> 0.01 +> -0.2 +> -0.1 +> 0.05 +> V.empty) /\ (0.0 +> 0.01 +> 0.02 +> 0.2 +> 0.01 +> V.empty)
 
+osc3 :: POsc D3
+osc3 = (0.0 +> 0.01 +> -0.2 +> V.empty) /\ (0.0 +> 0.01 +> 0.02 +> V.empty)
+
 type SceneType
   = { speaker :: TSpeaker /\ { mix :: Unit }
-    , mix :: TGain /\ { unit0 :: Unit, unit1 :: Unit, unit2 :: Unit }
+    , mix :: TGain /\ { unit0 :: Unit, unit1 :: Unit, unit2 :: Unit, unit3 :: Unit }
     , unit0 :: TGain /\ { osc0 :: Unit }
     , osc0 :: TPeriodicOsc /\ {}
     , unit1 :: TGain /\ { osc1 :: Unit }
     , osc1 :: TPeriodicOsc /\ {}
     , unit2 :: TGain /\ { osc2 :: Unit }
     , osc2 :: TPeriodicOsc /\ {}
+    , unit3 :: TGain /\ { osc3 :: Unit }
+    , osc3 :: TPeriodicOsc /\ {}
     }
 
 type FrameTp p i o a
@@ -80,7 +85,19 @@ ne2cf i = go i i
   go x (a :| (b : c)) = deferCofree \_ -> a /\ (Identity $ go x (b :| c))
 
 type Control
-  = { asdr :: ASDR, osc0 :: CIN, osc1 :: CIN, osc2 :: CIN }
+  = { asdr :: ASDR, osc0 :: CIN, osc1 :: CIN, osc2 :: CIN, osc3 :: CIN }
+
+cofrees =
+  { osc0: ne2cf (66.0 :| 62.0 : 59.0 : 55.0 : 58.0 : 59.0 : 57.0 : Nil)
+  , osc1: ne2cf (63.0 :| 54.0 : 54.0 : 50.0 : 55.0 : 52.0 : 54.0 : Nil)
+  , osc2: ne2cf (58.0 :| 48.0 : 50.0 : 46.0 : 50.0 : 43.0 : 48.0 : Nil)
+  , osc3: ne2cf (47.0 :| 45.0 : 43.0 : 41.0 : 39.0 : 33.0 : 38.0 : Nil)
+  } ::
+    { osc0 :: Cofree Identity Number
+    , osc1 :: Cofree Identity Number
+    , osc2 :: Cofree Identity Number
+    , osc3 :: Cofree Identity Number
+    }
 
 createFrame :: FrameTp Frame0 {} SceneType Control
 createFrame =
@@ -90,15 +107,18 @@ createFrame =
           , unit0: 0.0
           , unit1: 0.0
           , unit2: 0.0
-          , osc0: { waveform: osc0, onOff: On, freq: midi2cps 51.0 }
-          , osc1: { waveform: osc1, onOff: On, freq: midi2cps 57.0 }
-          , osc2: { waveform: osc2, onOff: On, freq: midi2cps 60.0 }
+          , unit3: 0.0
+          , osc0: { waveform: osc0, onOff: On, freq: midi2cps 66.0 }
+          , osc1: { waveform: osc1, onOff: On, freq: midi2cps 63.0 }
+          , osc2: { waveform: osc2, onOff: On, freq: midi2cps 58.0 }
+          , osc3: { waveform: osc3, onOff: On, freq: midi2cps 47.0 }
           }
-          $> { asdr: makePiecewise pwf
-            , osc0: ne2cf (50.0 :| 52.0 : 54.0 : 56.0 : Nil)
-            , osc1: ne2cf (55.0 :| 57.0 : 60.0 : 61.0 : 63.0 : 67.0 : Nil)
-            , osc2: ne2cf (62.0 :| 65.0 : 66.0 : 69.0 : 71.0 : Nil)
-            }
+          $> R.union { asdr: makePiecewise pwf }
+              { osc0: unwrap $ tail cofrees.osc0
+              , osc1: unwrap $ tail cofrees.osc1
+              , osc2: unwrap $ tail cofrees.osc2
+              , osc3: unwrap $ tail cofrees.osc3
+              }
       )
 
 data Events
@@ -133,6 +153,7 @@ piece =
             { unit0: g * ramp
             , unit1: g
             , unit2: g * (sub 1.0 <$> ramp)
+            , unit3: g
             }
         in
           if active && trigger == MouseDown then
@@ -141,6 +162,7 @@ piece =
                   { osc0: midi2cps $ head ctrl.osc0
                   , osc1: midi2cps $ head ctrl.osc1
                   , osc2: midi2cps $ head ctrl.osc2
+                  , osc3: midi2cps $ head ctrl.osc3
                   }
                   ch
               )
@@ -149,6 +171,7 @@ piece =
                   , osc0 = unwrap $ tail ctrl.osc0
                   , osc1 = unwrap $ tail ctrl.osc1
                   , osc2 = unwrap $ tail ctrl.osc2
+                  , osc3 = unwrap $ tail ctrl.osc3
                   }
           else
             ichange ch
