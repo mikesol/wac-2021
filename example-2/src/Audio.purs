@@ -68,7 +68,7 @@ pwf' = (0.03 /\ 1.0) : (0.07 /\ 0.1) : (0.09 /\ 0.0) : (envE /\ 0.0) : Nil
 pwf :: NonEmpty List (Number /\ Number)
 pwf =
   (0.00 /\ 0.0)
-    :| (join $ map (\i -> over (traversed <<< _1) (add (envE * toNumber i)) pwf') (0 .. 100))
+    :| (join $ map (\i -> over (traversed <<< _1) (add (envE * toNumber i)) pwf') (0 .. 200))
 
 endT :: Number
 endT = fst $ NEL.last $ NonEmptyList pwf
