@@ -1,6 +1,7 @@
 module Audio where
 
 import Prelude
+
 import Control.Apply.Indexed ((:*>))
 import Control.Comonad.Cofree (Cofree, deferCofree, head, tail)
 import Data.Identity (Identity(..))
@@ -24,10 +25,11 @@ import WAGS.Control.Indexed (IxWAG)
 import WAGS.Control.Types (Frame0, Scene)
 import WAGS.Graph.AudioUnit (OnOff(..), TGain, TPeriodicOsc, TSpeaker)
 import WAGS.Graph.Parameter (ff)
+import WAGS.Interpret (class AudioInterpret)
 import WAGS.Math (calcSlope)
 import WAGS.NE2CF (ASDR, makePiecewise)
 import WAGS.Patch (ipatch)
-import WAGS.Run (RunAudio, SceneI, RunEngine)
+import WAGS.Run (SceneI)
 
 type POsc (a :: Type)
   = V.Vec a Number /\ V.Vec a Number
@@ -57,8 +59,8 @@ type SceneType
     , osc3 :: TPeriodicOsc /\ {}
     }
 
-type FrameTp p i o a
-  = IxWAG RunAudio RunEngine p Unit i o a
+type FrameTp a e p i o x
+  = IxWAG a e p Unit i o x
 
 envE = 0.11 :: Number
 
@@ -99,7 +101,9 @@ cofrees =
     , osc3 :: Cofree Identity Number
     }
 
-createFrame :: FrameTp Frame0 {} SceneType Control
+createFrame ::
+  forall audio engine. AudioInterpret audio engine =>
+  FrameTp audio engine Frame0 {} SceneType Control
 createFrame =
   ipatch
     :*> ( ichange
@@ -130,7 +134,7 @@ derive instance eqEvents :: Eq Events
 midi2cps :: Number -> Number
 midi2cps i = 440.0 * (2.0 `pow` ((i - 69.0) / 12.0))
 
-piece :: Scene (SceneI Events Unit) RunAudio RunEngine Frame0 Unit
+piece :: forall audio engine. AudioInterpret audio engine => Scene (SceneI Events Unit) audio engine Frame0 Unit
 piece =
   (const createFrame)
     @!> iloop \e ctrl ->

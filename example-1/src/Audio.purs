@@ -17,10 +17,11 @@ import WAGS.Control.Indexed (IxWAG)
 import WAGS.Control.Types (Frame0, Scene)
 import WAGS.Graph.AudioUnit (OnOff(..), TGain, TPeriodicOsc, TSpeaker)
 import WAGS.Graph.Parameter (ff)
+import WAGS.Interpret (class AudioInterpret)
 import WAGS.Math (calcSlope, calcSlopeExp)
 import WAGS.NE2CF (ASDR, makePiecewise)
 import WAGS.Patch (ipatch)
-import WAGS.Run (RunAudio, SceneI, RunEngine)
+import WAGS.Run (SceneI)
 
 type POsc (a :: Type)
   = V.Vec a Number /\ V.Vec a Number
@@ -45,8 +46,8 @@ type SceneType
     , osc2 :: TPeriodicOsc /\ {}
     }
 
-type FrameTp p i o a
-  = IxWAG RunAudio RunEngine p Unit i o a
+type FrameTp a e p i o x
+  = IxWAG a e p Unit i o x
 
 envE = 0.11 :: Number
 
@@ -58,7 +59,10 @@ pwf =
   (0.00 /\ 0.0)
     :| (join $ map (\i -> over (traversed <<< _1) (add (envE * toNumber i)) pwf') (0 .. 100))
 
-createFrame :: FrameTp Frame0 {} SceneType { asdr :: ASDR }
+createFrame ::
+  forall audio engine.
+  AudioInterpret audio engine =>
+  FrameTp audio engine Frame0 {} SceneType { asdr :: ASDR }
 createFrame =
   ipatch
     :*> ( ichange
@@ -73,7 +77,10 @@ createFrame =
           $> { asdr: makePiecewise pwf }
       )
 
-piece :: Scene (SceneI Unit Unit) RunAudio RunEngine Frame0 Unit
+piece ::
+  forall audio engine.
+  AudioInterpret audio engine =>
+  Scene (SceneI Unit Unit) audio engine Frame0 Unit
 piece =
   (const createFrame)
     @!> iloop \e { asdr } ->

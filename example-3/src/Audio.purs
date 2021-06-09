@@ -25,9 +25,10 @@ import WAGS.Control.Functions.Validated (ibranch, (@!>))
 import WAGS.Control.Indexed (IxWAG)
 import WAGS.Control.Types (Frame0, Scene, WAG)
 import WAGS.Graph.AudioUnit (OnOff(..), TBandpass, TGain, TLoopBuf, TSawtoothOsc, TSpeaker)
+import WAGS.Interpret (class AudioInterpret)
 import WAGS.NE2CF (NonEmptyToCofree', nonEmptyToCofree')
 import WAGS.Patch (ipatch)
-import WAGS.Run (RunAudio, SceneI, RunEngine)
+import WAGS.Run (SceneI)
 
 type POsc (a :: Type)
   = V.Vec a Number /\ V.Vec a Number
@@ -107,17 +108,19 @@ type BaseSceneClosed
 type BaseSceneOpen
   = BaseScene ( buf :: Unit ) ( buf :: TLoopBuf /\ {} )
 
-type FrameTp p i o a
-  = IxWAG RunAudio RunEngine p Unit i o a
+type FrameTp a e p i o x
+  = IxWAG a e p Unit i o x
 
-type SceneTp :: forall k. k -> Type
-type SceneTp p
-  = Scene (SceneI Unit Unit) RunAudio RunEngine p Unit
+type SceneTp :: forall k. Type -> Type -> k -> Type
+type SceneTp a e p
+  = Scene (SceneI Unit Unit) a e p Unit
 
-type ContTp p i a
-  = WAG RunAudio RunEngine p Unit i a -> SceneTp p
+type ContTp a e p i x
+  = WAG a e p Unit i x -> SceneTp a e p
 
-createFrame :: FrameTp Frame0 {} BaseSceneClosed Step1Acc
+createFrame :: forall audio engine.
+  AudioInterpret audio engine =>
+  FrameTp audio engine Frame0 {} BaseSceneClosed Step1Acc
 createFrame =
   ipatch
     :*> ichange
@@ -144,7 +147,9 @@ type CFHead
 midi2cps :: Number -> Number
 midi2cps i = 440.0 * (2.0 `pow` ((i - 69.0) / 12.0))
 
-step2 :: forall proof. ContTp proof BaseSceneOpen Step2Acc
+step2 :: forall audio engine proof.
+  AudioInterpret audio engine =>
+  ContTp audio engine proof BaseSceneOpen Step2Acc
 step2 =
   ibranch \e a ->
     let
@@ -172,7 +177,9 @@ step2 =
 
 fund = 123.0 :: Number
 
-step1 :: forall proof. ContTp proof BaseSceneClosed Step1Acc
+step1 :: forall audio engine proof.
+  AudioInterpret audio engine =>
+  ContTp audio engine proof BaseSceneClosed Step1Acc
 step1 =
   ibranch \e a ->
     let
@@ -197,5 +204,7 @@ step1 =
                   $> initialStep2Acc
               )
 
-piece :: SceneTp Frame0
+piece :: forall audio engine.
+  AudioInterpret audio engine =>
+  SceneTp audio engine    Frame0
 piece = const createFrame @!> step1
