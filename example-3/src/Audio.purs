@@ -13,6 +13,7 @@ import Data.List.Types (NonEmptyList(..))
 import Data.Maybe (Maybe(..))
 import Data.NonEmpty ((:|), NonEmpty)
 import Data.Profunctor (lcmap)
+import Data.Time.Duration (Milliseconds(..))
 import Data.Tuple (Tuple(..))
 import Data.Tuple.Nested (type (/\))
 import Data.Vec as V
@@ -28,6 +29,7 @@ import WAGS.Graph.AudioUnit (OnOff(..), TBandpass, TGain, TLoopBuf, TSawtoothOsc
 import WAGS.Interpret (class AudioInterpret)
 import WAGS.NE2CF (NonEmptyToCofree', nonEmptyToCofree')
 import WAGS.Patch (ipatch)
+import WAGS.Rendered (Instruction)
 import WAGS.Run (SceneI)
 
 type POsc (a :: Type)
@@ -204,7 +206,20 @@ step1 =
                   $> initialStep2Acc
               )
 
+type PieceRepl = Scene (SceneI Unit Unit) Unit Instruction Frame0 Unit
+
+pieceRepl :: SceneI Unit Unit
+pieceRepl = 
+  { trigger :unit
+  , world :unit
+  , time :0.0
+  , sysTime : Milliseconds 0.0
+  , active : false
+  , headroom : 10
+  }
+
 piece :: forall audio engine.
   AudioInterpret audio engine =>
-  SceneTp audio engine    Frame0
+  SceneTp audio engine Frame0
 piece = const createFrame @!> step1
+
