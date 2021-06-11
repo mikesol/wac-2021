@@ -35,16 +35,6 @@ osc1 = (0.0 +> 0.03 +> 0.05 +> 0.1 +> V.empty) /\ (0.0 +> 0.1 +> -0.2 +> 0.03 +>
 osc2 :: POsc D5
 osc2 = (0.0 +> 0.01 +> -0.2 +> -0.1 +> 0.05 +> V.empty) /\ (0.0 +> 0.01 +> 0.02 +> 0.2 +> 0.01 +> V.empty)
 
-type SceneType
-  = { speaker :: TSpeaker /\ { mix :: Unit }
-    , mix :: TGain /\ { unit0 :: Unit, unit1 :: Unit, unit2 :: Unit }
-    , unit0 :: TGain /\ { osc0 :: Unit }
-    , osc0 :: TPeriodicOsc /\ {}
-    , unit1 :: TGain /\ { osc1 :: Unit }
-    , osc1 :: TPeriodicOsc /\ {}
-    , unit2 :: TGain /\ { osc2 :: Unit }
-    , osc2 :: TPeriodicOsc /\ {}
-    }
 
 type FrameTp a e p i o x
   = IxWAG a e p Unit i o x
@@ -58,6 +48,17 @@ pwf :: NonEmpty List (Number /\ Number)
 pwf =
   (0.00 /\ 0.0)
     :| (join $ map (\i -> over (traversed <<< _1) (add (envE * toNumber i)) pwf') (0 .. 100))
+
+type SceneType
+  = { speaker :: TSpeaker /\ { mix :: Unit }
+    , mix :: TGain /\ { unit0 :: Unit, unit1 :: Unit, unit2 :: Unit }
+    , unit0 :: TGain /\ { osc0 :: Unit }
+    , osc0 :: TPeriodicOsc /\ {}
+    , unit1 :: TGain /\ { osc1 :: Unit }
+    , osc1 :: TPeriodicOsc /\ {}
+    , unit2 :: TGain /\ { osc2 :: Unit }
+    , osc2 :: TPeriodicOsc /\ {}
+    }
 
 createFrame ::
   forall audio engine.
