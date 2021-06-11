@@ -21,6 +21,7 @@ You can edit this file as you like.
   , "lists"
   , "math"
   , "maybe"
+  , "mezgeb"
   , "painting"
   , "prelude"
   , "psci-support"

@@ -199,6 +199,11 @@ let additions =
             "https://github.com/natefaubion/purescript-convertable-options.git"
         , version = "v1.0.0"
         }
+      , mezgeb =
+        { dependencies = [ "console", "effect", "maybe", "record" ]
+        , repo = "https://github.com/meeshkan/purescript-mezgeb.git"
+        , version = "v0.0.1"
+        }
       }
 
 in  upstream // overrides // additions
