@@ -138,7 +138,7 @@ type BaseSceneOpen
 type FrameTp a e p i o x
   = IxWAG a e p Unit i o x
 
---type SceneTp :: forall k. Type -> Type -> k -> Type
+type SceneTp :: forall k. Type -> Type -> k -> Type
 type SceneTp a e p
   = Scene (SceneI Unit Unit) a e p Unit
 
