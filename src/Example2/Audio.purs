@@ -10,7 +10,7 @@ import Data.Lens (_1, over, traversed)
 import Data.List (List(..), (..), (:))
 import Data.List.NonEmpty as NEL
 import Data.List.Types (NonEmptyList(..))
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty, (:|))
 import Data.Tuple (fst)
@@ -129,13 +129,14 @@ createFrame =
 data Events
   = StartExample
   | MouseDown
+  | MouseUp
 
 derive instance eqEvents :: Eq Events
 
 midi2cps :: Number -> Number
 midi2cps i = 440.0 * (2.0 `pow` ((i - 69.0) / 12.0))
 
-piece :: forall audio engine. AudioInterpret audio engine => Scene (SceneI Events Unit) audio engine Frame0 Unit
+piece :: forall audio engine. AudioInterpret audio engine => Scene (SceneI Events (Maybe { x :: Int, y :: Int })) audio engine Frame0 Unit
 piece =
   (const createFrame)
     @!> iloop \e ctrl ->
@@ -161,12 +162,12 @@ piece =
             , unit3: g
             }
         in
-          if trigger == Just MouseDown then
+          if (trigger == Just MouseDown  || trigger == Just MouseUp) then
             ichange
               ( R.union
-                  { osc0: midi2cps $ head ctrl.osc0
-                  , osc1: midi2cps $ head ctrl.osc1
-                  , osc2: midi2cps $ head ctrl.osc2
+                  { osc0: midi2cps $ (head ctrl.osc0 + toNumber (maybe 0 (\a -> a.x `mod` 12) e.world))
+                  , osc1: midi2cps $ (head ctrl.osc1 + toNumber (maybe 0 (\a -> a.x `mod` 12) e.world))
+                  , osc2: midi2cps $ (head ctrl.osc2 + toNumber (maybe 0 (\a -> a.x `mod` 12) e.world))
                   , osc3: midi2cps $ head ctrl.osc3
                   }
                   ch

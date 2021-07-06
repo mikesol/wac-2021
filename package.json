@@ -19,7 +19,7 @@
   },
   "scripts": {
     "postinstall": "spago install && spago build",
-    "start": "webpack serve --mode=development --open",
+    "start": "webpack serve --mode=development --open --public https://mikesol-wac-2021-wr55r442gq9v-8080.githubpreview.dev/",
     "build": "webpack"
   }
 }

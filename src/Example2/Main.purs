@@ -1,7 +1,7 @@
 module Example2.Main where
 
 import Prelude
-import Example2.Audio (piece, Events(..))
+
 import Control.Alt ((<|>))
 import Control.Comonad.Cofree (Cofree, (:<))
 import Data.Foldable (for_)
@@ -13,8 +13,10 @@ import Data.Vec as V
 import Effect (Effect)
 import Effect.Aff.Class (class MonadAff)
 import Effect.Class (class MonadEffect)
+import Example2.Audio (piece, Events(..))
+import FRP.Behavior.Mouse (position)
 import FRP.Event (subscribe)
-import FRP.Event.Mouse (down)
+import FRP.Event.Mouse (down, getMouse, up)
 import Halogen (ClassName(..))
 import Halogen as H
 import Halogen.HTML as HH
@@ -103,13 +105,14 @@ handleAction = case _ of
   StartAudio -> do
     handleAction StopAudio
     ctx <- H.liftEffect context
+    mouse <- H.liftEffect getMouse
     unitCache <- H.liftEffect makeUnitCache
     let
       ffiAudio = defaultFFIAudio ctx unitCache
     unsubscribe <-
       H.liftEffect
         $ subscribe
-            (run (pure StartExample <|> (down $> MouseDown)) (pure unit) { easingAlgorithm } (FFIAudio ffiAudio) piece)
+            (run (pure StartExample <|> (down $> MouseDown) <|> (up $> MouseUp)) (position mouse) { easingAlgorithm } (FFIAudio ffiAudio) piece)
             (const $ pure unit)
     H.modify_ _ { unsubscribe = unsubscribe, audioCtx = Just ctx }
   StopAudio -> do

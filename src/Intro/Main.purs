@@ -2,14 +2,18 @@ module Intro.Main where
 
 import Prelude
 
+import Control.Comonad.Cofree (Cofree, mkCofree)
+import Data.Identity (Identity(..))
 import Data.Maybe (Maybe(..))
+import Effect.Aff (Milliseconds(..), delay, launchAff_)
 import Effect.Aff.Class (class MonadAff)
-import Effect.Class (class MonadEffect)
+import Effect.Class (class MonadEffect, liftEffect)
+import FRP.Event (makeEvent, subscribe)
 import Halogen (ClassName(..))
 import Halogen as H
 import Halogen.HTML as HH
-import Halogen.Subscription as HS
 import Halogen.HTML.Properties as HP
+import Halogen.Subscription as HS
 
 
 type State
@@ -34,6 +38,8 @@ initialState _ =
 
 classes :: forall r p. Array String -> HP.IProp ( class :: String | r ) p
 classes = HP.classes <<< map ClassName
+
+data FizzBang = Fizz | Bang
 
 render :: forall m. State -> H.ComponentHTML Action () m
 render { myText } =
@@ -64,7 +70,37 @@ handleAction :: forall output m. MonadEffect m => MonadAff m => Action -> H.Halo
 handleAction = case _ of
   Initialize -> do
     { emitter, listener } <- H.liftEffect HS.create
+    let delFac = 300.0
+    let myEvent = makeEvent \f -> do
+          launchAff_ do
+            liftEffect $ f "hello"
+            delay (Milliseconds delFac)
+            liftEffect $ f "world"
+            delay (Milliseconds delFac)
+            liftEffect $ f "hello"
+            delay (Milliseconds delFac)
+            liftEffect $ f "world"
+            delay (Milliseconds delFac)
+            liftEffect $ f "hello"
+            delay (Milliseconds delFac)
+            liftEffect $ f "world"
+            delay (Milliseconds delFac)
+            liftEffect $ f "hello"
+            delay (Milliseconds delFac)
+            liftEffect $ f "world"
+            delay (Milliseconds delFac)
+            liftEffect $ f "hello"
+            delay (Milliseconds delFac)
+            liftEffect $ f "world"
+            delay (Milliseconds delFac)
+            liftEffect $ f "hello"
+            delay (Milliseconds delFac)
+            liftEffect $ f "world"
+            delay (Milliseconds delFac)
+          pure $ pure unit
+    _ <- H.liftEffect $ subscribe myEvent \str -> HS.notify listener (UpdateUI str)
+    let a x n = mkCofree n (Identity (a (if true then Fizz else Bang) (n + 1))) 
     void $ H.subscribe emitter
-    H.liftEffect $ HS.notify listener (UpdateUI "Hello WAC2021!")
+    H.liftEffect $ HS.notify listener (UpdateUI "Goals: Learn Events, Learn Behaviors, Learn Streams, Learn Linear Types")
   UpdateUI myText -> do
     H.modify_ _ { myText = myText }

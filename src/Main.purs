@@ -15,7 +15,7 @@ import Halogen.VDom.Driver (runUI)
 import Intro.Main as Intro
 
 component :: forall query input output m. MonadEffect m => MonadAff m => Component query input output m
-component = Example1.component
+component = Example3.component
 
 main :: Effect Unit
 main =
