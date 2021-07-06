@@ -65,6 +65,6 @@ handleAction = case _ of
   Initialize -> do
     { emitter, listener } <- H.liftEffect HS.create
     void $ H.subscribe emitter
-    H.liftEffect $ HS.notify listener (UpdateUI "hello")
+    H.liftEffect $ HS.notify listener (UpdateUI "Hello WAC2021!")
   UpdateUI myText -> do
     H.modify_ _ { myText = myText }
