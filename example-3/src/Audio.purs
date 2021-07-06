@@ -1,6 +1,7 @@
 module Audio where
 
 import Prelude
+
 import Control.Applicative.Indexed ((:*>))
 import Control.Comonad.Cofree (Cofree, deferCofree, head, tail)
 import Data.Either (Either(..))
@@ -30,7 +31,7 @@ import WAGS.Control.Indexed (IxWAG)
 import WAGS.Control.Types (Frame0, Scene, WAG)
 import WAGS.Graph.AudioUnit (OnOff(..), TBandpass, TGain, TLoopBuf, TSawtoothOsc, TSpeaker)
 import WAGS.Interpret (class AudioInterpret)
-import WAGS.NE2CF (NonEmptyToCofree', nonEmptyToCofree')
+import WAGS.Lib.SFofT (SFofT', nonEmptyToSFofT')
 import WAGS.Patch (ipatch)
 import WAGS.Rendered (Instruction)
 import WAGS.Run (SceneI)
@@ -56,9 +57,9 @@ shift Nothing = 0
 
 shift (Just a) = 1 + a
 
-spacedNE2CF :: forall a. Number -> NonEmpty List a -> NonEmptyToCofree' a
+spacedNE2CF :: forall a. Number -> NonEmpty List a -> SFofT' a
 spacedNE2CF space l =
-  nonEmptyToCofree' Nothing
+  nonEmptyToSFofT' Nothing
     $ mapWithIndex
         ( \i' ->
             let
@@ -90,7 +91,7 @@ type Step1Acc' o
     }
 
 type Step1Acc
-  = Step1Acc' (NonEmptyToCofree' Number)
+  = Step1Acc' (SFofT' Number)
 
 withSteady :: forall r x. Lacks "freqA" x => Lacks "funds" x => Lacks "rt" x => Lacks "tz" x => { | x } -> { | SteadyAcc r } -> { | SteadyAcc x }
 withSteady x sa = M.insert (M.get { funds: u, freqA: u, tz: u, rt: u } sa) x
@@ -109,7 +110,7 @@ type Step2Acc' o
   = { osc :: o | SteadyAcc () }
 
 type Step2Acc
-  = Step2Acc' (NonEmptyToCofree' Number)
+  = Step2Acc' (SFofT' Number)
 
 initialStep2Acc :: forall r. { | SteadyAcc r } -> Step2Acc
 initialStep2Acc sa =
@@ -298,11 +299,10 @@ type PieceRepl
 
 pieceRepl :: SceneI Unit Unit
 pieceRepl =
-  { trigger: unit
+  { trigger: Nothing
   , world: unit
   , time: 0.0
   , sysTime: Milliseconds 0.0
-  , active: false
   , headroom: 10
   }
 

@@ -10,6 +10,7 @@ import Data.Lens (_1, over, traversed)
 import Data.List (List(..), (..), (:))
 import Data.List.NonEmpty as NEL
 import Data.List.Types (NonEmptyList(..))
+import Data.Maybe (Maybe(..))
 import Data.Newtype (unwrap)
 import Data.NonEmpty (NonEmpty, (:|))
 import Data.Tuple (fst)
@@ -26,8 +27,8 @@ import WAGS.Control.Types (Frame0, Scene)
 import WAGS.Graph.AudioUnit (OnOff(..), TGain, TPeriodicOsc, TSpeaker)
 import WAGS.Graph.Parameter (ff)
 import WAGS.Interpret (class AudioInterpret)
+import WAGS.Lib.SFofT (SAPFofT, makePiecewise)
 import WAGS.Math (calcSlope)
-import WAGS.NE2CF (ASDR, makePiecewise)
 import WAGS.Patch (ipatch)
 import WAGS.Run (SceneI)
 
@@ -87,7 +88,7 @@ ne2cf i = go i i
   go x (a :| (b : c)) = deferCofree \_ -> a /\ (Identity $ go x (b :| c))
 
 type Control
-  = { asdr :: ASDR, osc0 :: CIN, osc1 :: CIN, osc2 :: CIN, osc3 :: CIN }
+  = { pulse :: SAPFofT, osc0 :: CIN, osc1 :: CIN, osc2 :: CIN, osc3 :: CIN }
 
 cofrees =
   { osc0: ne2cf (66.0 :| 62.0 : 59.0 : 55.0 : 58.0 : 59.0 : 57.0 : Nil)
@@ -117,7 +118,7 @@ createFrame =
           , osc2: { waveform: osc2, onOff: On, freq: midi2cps 58.0 }
           , osc3: { waveform: osc3, onOff: On, freq: midi2cps 47.0 }
           }
-          $> R.union { asdr: makePiecewise pwf }
+          $> R.union { pulse: makePiecewise pwf }
               { osc0: unwrap $ tail cofrees.osc0
               , osc1: unwrap $ tail cofrees.osc1
               , osc2: unwrap $ tail cofrees.osc2
@@ -139,9 +140,9 @@ piece =
   (const createFrame)
     @!> iloop \e ctrl ->
         let
-          { time, headroom, active, trigger } = e
+          { time, headroom, trigger } = e
 
-          pulse = ctrl.asdr { time, headroom: toNumber headroom / 1000.0 }
+          pulse = ctrl.pulse { time, headroom: toNumber headroom / 1000.0 }
 
           g' = ff 0.04 $ head pulse
 
@@ -160,7 +161,7 @@ piece =
             , unit3: g
             }
         in
-          if active && trigger == MouseDown then
+          if trigger == Just MouseDown then
             ichange
               ( R.union
                   { osc0: midi2cps $ head ctrl.osc0
@@ -171,7 +172,7 @@ piece =
                   ch
               )
               $> ctrl
-                  { asdr = tail pulse
+                  { pulse = tail pulse
                   , osc0 = unwrap $ tail ctrl.osc0
                   , osc1 = unwrap $ tail ctrl.osc1
                   , osc2 = unwrap $ tail ctrl.osc2
@@ -179,4 +180,4 @@ piece =
                   }
           else
             ichange ch
-              $> ctrl { asdr = tail pulse }
+              $> ctrl { pulse = tail pulse }

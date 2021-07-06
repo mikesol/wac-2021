@@ -117,7 +117,7 @@ handleAction = case _ of
             "https://freesound.org/data/previews/128/128649_689000-hq.mp3"
     unitCache <- H.liftEffect makeUnitCache
     let
-      ffiAudio = (defaultFFIAudio ctx unitCache) { buffers = O.singleton "chaos" chaos }
+      ffiAudio = (defaultFFIAudio ctx unitCache) { buffers = pure $ O.singleton "chaos" chaos }
     unsubscribe <-
       H.liftEffect
         $ subscribe

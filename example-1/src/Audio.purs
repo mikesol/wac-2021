@@ -19,7 +19,7 @@ import WAGS.Graph.AudioUnit (OnOff(..), TGain, TPeriodicOsc, TSpeaker)
 import WAGS.Graph.Parameter (ff)
 import WAGS.Interpret (class AudioInterpret)
 import WAGS.Math (calcSlope, calcSlopeExp)
-import WAGS.NE2CF (ASDR, makePiecewise)
+import WAGS.Lib.SFofT (SAPFofT, makePiecewise)
 import WAGS.Patch (ipatch)
 import WAGS.Run (SceneI)
 
@@ -63,7 +63,7 @@ type SceneType
 createFrame ::
   forall audio engine.
   AudioInterpret audio engine =>
-  FrameTp audio engine Frame0 {} SceneType { asdr :: ASDR }
+  FrameTp audio engine Frame0 {} SceneType { volume :: SAPFofT }
 createFrame =
   ipatch
     :*> ( ichange
@@ -75,7 +75,7 @@ createFrame =
           , osc1: { waveform: osc1, freq: 440.0, onOff: On }
           , osc2: { waveform: osc2, freq: 880.0, onOff: On }
           }
-          $> { asdr: makePiecewise pwf }
+          $> { volume: makePiecewise pwf }
       )
 
 piece ::
@@ -84,11 +84,11 @@ piece ::
   Scene (SceneI Unit Unit) audio engine Frame0 Unit
 piece =
   (const createFrame)
-    @!> iloop \e { asdr } ->
+    @!> iloop \e { volume } ->
         let
           { time, headroom } = e
 
-          pulse = asdr { time, headroom: toNumber headroom / 1000.0 }
+          pulse = volume { time, headroom: toNumber headroom / 1000.0 }
 
           g' = ff 0.04 $ head pulse
 
@@ -105,4 +105,4 @@ piece =
             , unit1: g
             , unit2: g * (sub 1.0 <$> ramp)
             }
-            $> { asdr: tail pulse }
+            $> { volume: tail pulse }
