@@ -165,9 +165,9 @@ piece =
           if (trigger == Just MouseDown  || trigger == Just MouseUp) then
             ichange
               ( R.union
-                  { osc0: midi2cps $ (head ctrl.osc0 + toNumber (maybe 0 (\a -> a.x `mod` 12) e.world))
-                  , osc1: midi2cps $ (head ctrl.osc1 + toNumber (maybe 0 (\a -> a.x `mod` 12) e.world))
-                  , osc2: midi2cps $ (head ctrl.osc2 + toNumber (maybe 0 (\a -> a.x `mod` 12) e.world))
+                  { osc0: midi2cps $ head ctrl.osc0 
+                  , osc1: midi2cps $ head ctrl.osc1 
+                  , osc2: midi2cps $ head ctrl.osc2 
                   , osc3: midi2cps $ head ctrl.osc3
                   }
                   ch
