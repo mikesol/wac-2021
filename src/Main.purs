@@ -3,7 +3,7 @@ module Main where
 import Prelude
 
 import Effect (Effect)
-import Effect.Aff (Aff)
+import Effect.Aff (Aff, Milliseconds(..), delay)
 import Effect.Aff.Class (class MonadAff)
 import Effect.Class (class MonadEffect)
 import Example1.Main as Example1
@@ -21,4 +21,7 @@ main :: Effect Unit
 main =
   runHalogenAff do
     body <- awaitBody
-    runUI component unit body
+    { dispose } <- runUI Example1.component unit body
+    delay (Milliseconds 3000.0)
+    dispose
+    runUI Example2.component unit body
