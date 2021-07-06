@@ -1,4 +1,4 @@
-module Audio where
+module Example1.Audio where
 
 import Prelude
 import Control.Apply.Indexed ((:*>))

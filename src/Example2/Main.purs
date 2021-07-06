@@ -1,7 +1,7 @@
-module Main where
+module Example2.Main where
 
 import Prelude
-import Audio (piece, Events(..))
+import Example2.Audio (piece, Events(..))
 import Control.Alt ((<|>))
 import Control.Comonad.Cofree (Cofree, (:<))
 import Data.Foldable (for_)
@@ -17,19 +17,11 @@ import FRP.Event (subscribe)
 import FRP.Event.Mouse (down)
 import Halogen (ClassName(..))
 import Halogen as H
-import Halogen.Aff (awaitBody, runHalogenAff)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.VDom.Driver (runUI)
 import WAGS.Interpret (AudioContext, BrowserPeriodicWave, FFIAudio(..), close, context, defaultFFIAudio, makePeriodicWave, makeUnitCache)
 import WAGS.Run (run)
-
-main :: Effect Unit
-main =
-  runHalogenAff do
-    body <- awaitBody
-    runUI component unit body
 
 type State
   = { unsubscribe :: Effect Unit

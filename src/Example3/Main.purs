@@ -1,8 +1,10 @@
-module Main where
+module Example3.Main where
 
 import Prelude
-import Audio (piece)
+
+import Example3.Audio (piece)
 import Control.Comonad.Cofree (Cofree, (:<))
+import Control.Promise (toAffE)
 import Data.Foldable (for_)
 import Data.Maybe (Maybe(..))
 import Data.Tuple (fst, snd)
@@ -13,21 +15,14 @@ import Effect (Effect)
 import Effect.Aff.Class (class MonadAff)
 import Effect.Class (class MonadEffect)
 import FRP.Event (subscribe)
+import Foreign.Object as O
 import Halogen (ClassName(..))
 import Halogen as H
-import Halogen.Aff (awaitBody, runHalogenAff)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.VDom.Driver (runUI)
-import WAGS.Interpret (AudioContext, BrowserPeriodicWave, FFIAudio(..), close, context, defaultFFIAudio, makePeriodicWave, makeUnitCache)
+import WAGS.Interpret (AudioContext, BrowserPeriodicWave, FFIAudio(..), close, context, decodeAudioDataFromUri, defaultFFIAudio, makePeriodicWave, makeUnitCache)
 import WAGS.Run (run)
-
-main :: Effect Unit
-main =
-  runHalogenAff do
-    body <- awaitBody
-    runUI component unit body
 
 type State
   = { unsubscribe :: Effect Unit
@@ -64,8 +59,14 @@ render _ =
             [ HH.div [ classes [ "flex-grow" ] ] []
             , HH.div_
                 [ HH.h1 [ classes [ "text-center", "text-3xl", "font-bold" ] ]
-                    [ HH.text "Example 1" ]
-                , HH.button
+                    [ HH.text "Example 3" ]
+                ]
+            , HH.div [ classes [ "flex-grow" ] ] []
+            ]
+        , HH.div [ classes [ "flex-grow-0", "flex", "flex-row" ] ]
+            [ HH.div [ classes [ "flex-grow" ] ] []
+            , HH.div_
+                [ HH.button
                     [ classes [ "text-2xl", "m-5", "bg-indigo-500", "p-3", "rounded-lg", "text-white", "hover:bg-indigo-400" ], HE.onClick \_ -> StartAudio ]
                     [ HH.text "Start audio" ]
                 , HH.button
@@ -101,9 +102,14 @@ handleAction = case _ of
   StartAudio -> do
     handleAction StopAudio
     ctx <- H.liftEffect context
+    chaos <-
+      H.liftAff $ toAffE
+        $ decodeAudioDataFromUri
+            ctx
+            "https://freesound.org/data/previews/128/128649_689000-hq.mp3"
     unitCache <- H.liftEffect makeUnitCache
     let
-      ffiAudio = defaultFFIAudio ctx unitCache
+      ffiAudio = (defaultFFIAudio ctx unitCache) { buffers = pure $ O.singleton "chaos" chaos }
     unsubscribe <-
       H.liftEffect
         $ subscribe

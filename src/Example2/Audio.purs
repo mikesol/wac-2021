@@ -1,4 +1,4 @@
-module Audio where
+module Example2.Audio where
 
 import Prelude
 

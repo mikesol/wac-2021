@@ -1,24 +1,16 @@
-module Main where
+module Intro.Main where
 
 import Prelude
 
 import Data.Maybe (Maybe(..))
-import Effect (Effect)
 import Effect.Aff.Class (class MonadAff)
 import Effect.Class (class MonadEffect)
 import Halogen (ClassName(..))
 import Halogen as H
-import Halogen.Aff (awaitBody, runHalogenAff)
 import Halogen.HTML as HH
 import Halogen.Subscription as HS
 import Halogen.HTML.Properties as HP
-import Halogen.VDom.Driver (runUI)
 
-main :: Effect Unit
-main =
-  runHalogenAff do
-    body <- awaitBody
-    runUI component unit body
 
 type State
   = { myText :: String
