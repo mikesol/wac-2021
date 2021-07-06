@@ -21,4 +21,4 @@ main :: Effect Unit
 main =
   runHalogenAff do
     body <- awaitBody
-    { dispose } <- runUI component unit body
+    runUI component unit body
