@@ -21,7 +21,4 @@ main :: Effect Unit
 main =
   runHalogenAff do
     body <- awaitBody
-    { dispose } <- runUI Example1.component unit body
-    delay (Milliseconds 3000.0)
-    dispose
-    runUI Example2.component unit body
+    { dispose } <- runUI component unit body
